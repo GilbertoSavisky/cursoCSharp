@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using ExercOrderProduct.Entities.Enums;
 
 namespace ExercOrderProduct.Entities
 {
@@ -8,15 +8,16 @@ namespace ExercOrderProduct.Entities
     {
         public int Quantity { get; set; }
         public double Price { get; set; }
-        public List<Product> Product { get; set; } = new List<Product>();
+        public Product Product { get; set; }
 
         public OrderItem()
         { }
 
-        public OrderItem(int quantity, double price)
+        public OrderItem(int quantity, double price, Product product)
         {
             Quantity = quantity;
             Price = price;
+            Product = product;
         }
 
         public double SubTotal()
