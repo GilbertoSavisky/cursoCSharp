@@ -14,7 +14,7 @@ namespace ExercOrderProduct
             string name = Console.ReadLine();
             Console.Write("Email: ");
             string email = Console.ReadLine();
-            Console.WriteLine("Birth date (DD/MM/YYYY): ");
+            Console.Write("Birth date (DD/MM/YYYY): ");
             DateTime birthDate = DateTime.Parse(Console.ReadLine());
             Client cli1 = new Client(name, email, birthDate);
             Console.WriteLine("Enter order data:");
@@ -26,12 +26,12 @@ namespace ExercOrderProduct
             int n = int.Parse(Console.ReadLine());
             for (int i = 1; i <= n; i++)
             {
-                Console.WriteLine($"Enter #{i} item data:");
+                Console.WriteLine($"\nEnter #{i} item data:");
                 Console.Write("Product name: ");
                 name = Console.ReadLine();
-                Console.WriteLine("Product price: ");
+                Console.Write("Product price: ");
                 double price = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-                Console.WriteLine("Quantity: ");
+                Console.Write("Quantity: ");
                 int quantity = int.Parse(Console.ReadLine());
 
                 Product prod = new Product(name, price);

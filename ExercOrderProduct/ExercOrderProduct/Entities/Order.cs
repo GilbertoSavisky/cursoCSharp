@@ -38,7 +38,7 @@ namespace ExercOrderProduct.Entities
             double sum = 0;
             foreach(OrderItem item in Items)
             {
-                sum += item.Price;
+                sum += item.SubTotal();
             }
             return sum;
         }
@@ -46,25 +46,20 @@ namespace ExercOrderProduct.Entities
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("Order Sumary:");
-            sb.Append("Order moment: ");
-            sb.AppendLine(Moment.ToString("dd/MM/yyyy HH:mm:ss"));
-            sb.Append("Order status: ");
-            sb.AppendLine(Status.ToString());
-            sb.Append("Client: ");
-            sb.Append(Client.Name);
-            sb.Append(" (");
-            sb.Append(Client.Email);
-            sb.Append(") - ");
-            sb.AppendLine(Client.Email);
-            sb.AppendLine("Order Items:");
+            sb.AppendLine("\n\nOrder Sumary:");
+            sb.AppendLine("Order moment: "+ Moment.ToString("dd/MM/yyyy HH:mm:ss"));
+            sb.AppendLine("Order status: "+ Status.ToString());
+            sb.AppendLine("Client: "+ Client.Name+ " (" + Client.BirthDate + ") - " + Client.Email);
+            
+            sb.AppendLine("\n\nOrder Items:");
+            
             foreach (OrderItem c in Items)
             {
                 sb.Append($"{c.Product.Name}, " +
                     $"${c.Product.Price.ToString("F2", CultureInfo.InvariantCulture)}, " +
-                    $"Quantity: {c.Quantity}, " +
-                    $"Subtotal: " +
-                    $"${c.SubTotal().ToString("F2", CultureInfo.InvariantCulture)}");
+                    $"\tQuantity: {c.Quantity}, " +
+                    $"\tSubtotal: " +
+                    $"\t${c.SubTotal().ToString("F2", CultureInfo.InvariantCulture)}");
                 sb.AppendLine();
             }
 
