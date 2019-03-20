@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Account.Entities
+namespace Accounts.Entities
 {
     class BusinessAccount : Account
     {
