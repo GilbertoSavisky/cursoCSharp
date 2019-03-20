@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Accounts.Entities
 {
-    class SavingsAccount : Account
+    sealed class SavingsAccount : Account
     {
         public double InterestRete { get; set; } // taxa de juros
 
@@ -21,7 +21,8 @@ namespace Accounts.Entities
             Balance += Balance * InterestRete;
         }
 
-        public override void WithDraw(double amount)
+        // 'Sealed' -> quer dizer que esse método não pode ser sobrescrito em uma nova classe
+        public sealed override void WithDraw(double amount)
         {
             base.WithDraw(amount);// reaproveitar o método da superclasse
             Console.Write("da poupança!");
