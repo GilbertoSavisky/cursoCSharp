@@ -19,9 +19,11 @@ namespace Accounts.Entities
 
         public Account() { }
 
-        public double WithDraw(double amount)
+        // Para o método puder ser sobrescrito tem que usar a palavra 'Virtual'
+        public virtual void WithDraw(double amount)
         {
-            return Balance -= amount;
+            Balance -= amount;
+            Console.Write("\nSaque realizado com sucesso ");
         }
 
         public void Deposit(double amount)

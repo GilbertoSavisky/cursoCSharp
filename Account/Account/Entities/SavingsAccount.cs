@@ -20,5 +20,13 @@ namespace Accounts.Entities
         {
             Balance += Balance * InterestRete;
         }
+
+        public override void WithDraw(double amount)
+        {
+            base.WithDraw(amount);// reaproveitar o método da superclasse
+            Console.Write("da poupança!");
+            Console.WriteLine("\nSerá descontado R$ 5,00");
+            Balance -= 5;
+        }
     }
 }

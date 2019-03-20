@@ -19,5 +19,13 @@ namespace Accounts.Entities
             if(LoanLimit >= amount)
                 Balance += amount;
         }
+
+        public override void WithDraw(double amount)
+        {
+            base.WithDraw(amount);// reaproveitar o método da superclasse
+            Console.Write("da conta empresarial!");
+            Console.WriteLine("\nSerá descontado R$ 2,00");
+            Balance -= 2;
+        }
     }
 }
