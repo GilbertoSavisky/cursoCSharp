@@ -32,11 +32,11 @@ namespace Tetris
         private void novoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             painel.Desenhar(graphics);
-            peca = new Peca(Peca.Sortear());
+            peca = new Peca(Peca.Formato.T);
             peca.Desenhar(graphics);
-            timer.Enabled = true;
-            timer.Interval = 1000;
-            timer.Start();
+            //timer.Enabled = true;
+            //timer.Interval = 1000;
+            //timer.Start();
             pontuacao = 0;
         }
 
@@ -58,13 +58,18 @@ namespace Tetris
                     else
                     {
                         painel.FixarPeca(peca);
-                        peca = new Peca(Peca.Sortear());
+                        peca = new Peca(Peca.Formato.T);
                     }
                     break;
                 case Keys.Up:
                     if(peca.PodeGirar(painel))
                         peca.Girar();
-                    break;                
+                    break;
+                case Keys.Enter:
+                    while (peca.PodeMover(painel, Peca.Direcoes.Baixo))
+                        peca.Mover(Peca.Direcoes.Baixo);
+                    break;
+
             }
             painel.Desenhar(graphics);
             peca.Desenhar(graphics);
@@ -78,15 +83,38 @@ namespace Tetris
         public void Atualizar()
         {
             if (peca.PodeMover(painel, Peca.Direcoes.Baixo))
+            {
                 peca.Mover(Peca.Direcoes.Baixo);
+                peca.Valor--;
+            }
             else
             {
                 painel.FixarPeca(peca);
+                pontuacao += peca.Valor;
+                int total_linhas = 0;
+                for (int i = 0; i < 20; i++)
+                {
+                    if (painel.LinhaCheia(i))
+                    {
+                        painel.RemoverLinha(i);
+                        total_linhas++;
+                    }
+                }
+                if (total_linhas > 0)
+                    pontuacao += peca.Valor * Fatorial(total_linhas);
                 peca = new Peca(Peca.Sortear());
             }
             painel.Desenhar(graphics);
             peca.Desenhar(graphics);
             txtPontuacao.Text = pontuacao.ToString();
+        }
+
+        private static int Fatorial(int n)
+        {
+            if (n == 1)
+                return 1;
+            else
+                return n * Fatorial(n - 1);
         }
     }
 }

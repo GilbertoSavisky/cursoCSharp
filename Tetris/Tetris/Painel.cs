@@ -38,16 +38,11 @@ namespace Tetris
         }
         public void FixarPeca(Peca peca)
         {
-            for (int i = 0; i < peca.Altura; i++)
-            {
-                for (int j = 0; j < peca.Largura; j++)
-                {
+            int i, j;
+            for (i = 0; i < peca.Altura; i++)
+                for (j = 0; j < peca.Largura; j++)
                     if (peca.Corpo[i, j].Cor != Color.Transparent)
-                    {
                         Corpo[peca.Linha + i, peca.Coluna + j].Cor = peca.Corpo[i, j].Cor;
-                    }
-                }
-            }
         }
 
         public bool LinhaCheia(int linha)

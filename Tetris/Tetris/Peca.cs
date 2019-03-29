@@ -149,14 +149,7 @@ namespace Tetris
                 }
             }
         }
-
-        public bool PodeMover(Painel painel, Direcoes direcoes)
-        {
-            Peca peca = Clonar();
-            peca.Mover(direcoes);
-            return peca.PodeEncaixar(painel);
-        }
-
+        
         public bool PodeEncaixar(Painel painel)
         {
             // Testa os limites do painel
@@ -170,16 +163,16 @@ namespace Tetris
             // Testa em relação às outras peças
             if(ok)
             {
-                for(i=0; i< Altura && ok; i++)
-                    for(j=0; j< Largura && ok; j++)
+                for (i = 0; i < Altura && ok; i++)
+                {
+                    for (j = 0; j < Largura && ok; j++)
                     {
                         tile_peca = (Corpo[i, j].Cor != Color.Transparent);
                         tile_painel = (painel.Corpo[i + Linha, j + Coluna].Cor != Color.Transparent);
-                        if(tile_peca && tile_painel)
-                        {
+                        if (tile_peca && tile_painel)
                             ok = false;
-                        }
                     }
+                }
             }
             return ok;
         }
@@ -192,17 +185,21 @@ namespace Tetris
                     peca.Corpo[i, j].Cor = Corpo[i, j].Cor;
             peca.Formatos = Formatos;
             peca.Altura = Altura;
-            peca.Coluna = Coluna;
             peca.Largura = Largura;
             peca.Linha = Linha;
+            peca.Coluna = Coluna;
             return peca;
+        }
+
+        public bool PodeMover(Painel painel, Direcoes direcoes)
+        {
+            Peca peca = Clonar();
+            peca.Mover(direcoes);
+            return peca.PodeEncaixar(painel);
         }
 
         public static Formato Sortear()
         {
-            //int n = Program.random.Next(1,
-              //  (int)Enum.GetValues(typeof(Formato)).Cast<Formato>().Last());
-            //System.Windows.Forms.MessageBox.Show(n.ToString());
             return (Formato)Program.random.Next(1, 
                 (int)Enum.GetValues(typeof(Formato)).Cast<Formato>().Last()+1);
 
@@ -212,11 +209,13 @@ namespace Tetris
         {
             Tile[,] corpo = new Tile[4, 4];
             bool vazia;
-            int largura, altura, i, j, k;
+            int largura=0, altura=0, i, j, k;
             //Rotacionar matriz para direita
             for (i = 0; i < 4; i++)
+            {
                 for (j = 0; j < 4; j++)
-                    corpo[3- j, i] = new Tile(Corpo[i,j].Cor);
+                    corpo[3 - j, i] = new Tile(Corpo[i, j].Cor);
+            }
             largura = Altura;
             altura = Largura;
             // Alinha ao topo
@@ -233,6 +232,7 @@ namespace Tetris
                     for (j = 0; j < 4; j++)
                         corpo[k, j].Cor = Color.Transparent;
                 }
+               
             }
 
             // Alinha ao esquerda
@@ -252,7 +252,6 @@ namespace Tetris
             }
 
             // Atribui o corpo transposto e espelhado
-            // Alinha ao topo
             for (i = 0; i < 4; i++)
                 for (j = 0; j < 4; j++)
                     Corpo[i, j].Cor = corpo[i,j].Cor;
@@ -263,7 +262,6 @@ namespace Tetris
         public bool PodeGirar(Painel painel)
         {
             Peca peca = Clonar();
-            peca.Girar();
             return peca.PodeEncaixar(painel);
         }
     }
