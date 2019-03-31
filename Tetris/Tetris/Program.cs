@@ -18,7 +18,8 @@ namespace Tetris
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmTetris());
+            Application.Run(new FrmTetris());
+
         }
     }
 }

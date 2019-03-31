@@ -69,50 +69,50 @@ namespace Tetris
                 case Formato.L:
                     Altura = 3;
                     Largura = 2;
-                    Corpo[0, 0].Cor = Color.Yellow;
-                    Corpo[1, 0].Cor = Color.Yellow;
-                    Corpo[2, 0].Cor = Color.Yellow;
-                    Corpo[2, 1].Cor = Color.Yellow;
+                    Corpo[0, 0].Cor = Color.YellowGreen;
+                    Corpo[1, 0].Cor = Color.YellowGreen;
+                    Corpo[2, 0].Cor = Color.YellowGreen;
+                    Corpo[2, 1].Cor = Color.YellowGreen;
                     break;
                 case Formato.J:
                     Altura = 3;
                     Largura = 2;
-                    Corpo[0, 1].Cor = Color.RoyalBlue;
-                    Corpo[1, 1].Cor = Color.RoyalBlue;
-                    Corpo[2, 1].Cor = Color.RoyalBlue;
-                    Corpo[2, 0].Cor = Color.RoyalBlue;
+                    Corpo[0, 1].Cor = Color.GreenYellow;
+                    Corpo[1, 1].Cor = Color.GreenYellow;
+                    Corpo[2, 1].Cor = Color.GreenYellow;
+                    Corpo[2, 0].Cor = Color.GreenYellow;
                     break;
                 case Formato.O:
                     Altura = 2;
                     Largura = 2;
-                    Corpo[0, 0].Cor = Color.Coral;
-                    Corpo[0, 1].Cor = Color.Coral;
-                    Corpo[1, 0].Cor = Color.Coral;
-                    Corpo[1, 1].Cor = Color.Coral;
+                    Corpo[0, 0].Cor = Color.IndianRed;
+                    Corpo[0, 1].Cor = Color.IndianRed;
+                    Corpo[1, 0].Cor = Color.IndianRed;
+                    Corpo[1, 1].Cor = Color.IndianRed;
                     break;
                 case Formato.S:
                     Altura = 2;
                     Largura = 3;
-                    Corpo[0, 1].Cor = Color.DarkCyan;
-                    Corpo[0, 2].Cor = Color.DarkCyan;
-                    Corpo[1, 0].Cor = Color.DarkCyan;
-                    Corpo[1, 1].Cor = Color.DarkCyan;
+                    Corpo[0, 1].Cor = Color.AliceBlue;
+                    Corpo[0, 2].Cor = Color.AliceBlue;
+                    Corpo[1, 0].Cor = Color.AliceBlue;
+                    Corpo[1, 1].Cor = Color.AliceBlue;
                     break;
                 case Formato.Z:
                     Altura = 2;
                     Largura = 3;
-                    Corpo[0, 0].Cor = Color.Blue;
-                    Corpo[0, 1].Cor = Color.Blue;
-                    Corpo[1, 1].Cor = Color.Blue;
-                    Corpo[1, 2].Cor = Color.Blue;
+                    Corpo[0, 0].Cor = Color.MediumPurple;
+                    Corpo[0, 1].Cor = Color.MediumPurple;
+                    Corpo[1, 1].Cor = Color.MediumPurple;
+                    Corpo[1, 2].Cor = Color.MediumPurple;
                     break;
                 case Formato.T:
                     Altura = 2;
                     Largura = 3;
-                    Corpo[0, 1].Cor = Color.Peru;
-                    Corpo[1, 0].Cor = Color.Peru;
-                    Corpo[1, 1].Cor = Color.Peru;
-                    Corpo[1, 2].Cor = Color.Peru;
+                    Corpo[0, 1].Cor = Color.HotPink;
+                    Corpo[1, 0].Cor = Color.HotPink;
+                    Corpo[1, 1].Cor = Color.HotPink;
+                    Corpo[1, 2].Cor = Color.HotPink;
                     break;
                 case Formato.I:
                     Altura = 4;
@@ -155,9 +155,8 @@ namespace Tetris
             // Testa os limites do painel
             bool ok = true, tile_peca, tile_painel;
             int i, j;
-            if (Coluna < 0
-                || Coluna + Largura > 10
-                || Linha + Altura > 20)
+            //
+            if (Coluna < 0 || Coluna + Largura > 10 || Linha + Altura > 20)
                 ok = false;
 
             // Testa em relação às outras peças
@@ -219,20 +218,19 @@ namespace Tetris
             largura = Altura;
             altura = Largura;
             // Alinha ao topo
+            vazia = true;
             for (i = 0; i < 4; i++)
             {
-                vazia = true;
                 for (j = 0; j < 4 && vazia; j++)
-                    vazia = corpo[i, j].Cor == Color.Transparent;
+                    vazia = corpo[0, j].Cor == Color.Transparent;
                 if (vazia)
                 {
-                    for (k = i; k < 3; k++)
+                    for (k = 0; k < 3; k++)
                         for (j = 0; j < 4; j++)
                             corpo[k, j].Cor = corpo[k + 1, j].Cor;
                     for (j = 0; j < 4; j++)
                         corpo[k, j].Cor = Color.Transparent;
                 }
-               
             }
 
             // Alinha ao esquerda
