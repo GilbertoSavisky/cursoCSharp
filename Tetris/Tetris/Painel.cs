@@ -60,9 +60,7 @@ namespace Tetris
             int i, j;
             for (i = linha; i > 0; i--)
                 for (j = 0; j < 10; j++)
-                    Corpo[i, j].Cor = Color.Transparent;
-            for (j = 0; j < 10; j++)
-                Corpo[0, j].Cor = Color.Transparent;
+                    Corpo[i, j].Cor = Corpo[i - 1, j].Cor;
         }
     }
 }
