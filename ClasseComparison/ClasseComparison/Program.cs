@@ -12,7 +12,9 @@ namespace System
             list.Add(new Produto("Notebook", 1200.00));
             list.Add(new Produto("Tablet", 450.00));
 
-            list.Sort(ComparaProdutos);
+            Comparison<Produto> comp = ComparaProdutos;
+
+            list.Sort(comp);
 
             foreach(Produto p in list)
                 Console.WriteLine(p);
