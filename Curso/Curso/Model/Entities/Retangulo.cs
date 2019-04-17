@@ -1,0 +1,27 @@
+﻿using System.Globalization;
+
+namespace Curso.Model.Entities
+{
+    class Retangulo : AbstractShape
+    {
+        public double Width { get; set; }
+        public double Height { get; set; }
+
+        public override double Area()
+        {
+            return Width * Height;
+        }
+
+        public override string ToString()
+        {
+            return "Retangulo cor = "
+                + Color
+                + ", Largura = "
+                + Width.ToString("F2", CultureInfo.InvariantCulture)
+                + ", Altura = "
+                + Height.ToString("F2", CultureInfo.InvariantCulture)
+                +", Area = "
+                + Area().ToString("F2", CultureInfo.InvariantCulture);
+        }
+    }
+}
