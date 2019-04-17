@@ -12,9 +12,7 @@ namespace System
             list.Add(new Produto("Notebook", 1200.00));
             list.Add(new Produto("Tablet", 450.00));
 
-            Comparison<Produto> comp = (p1, p2) => p1.Nome.ToUpper().CompareTo(p2.Nome.ToUpper());
-
-            list.Sort(comp);
+            list.Sort((p1, p2) => p1.Nome.ToUpper().CompareTo(p2.Nome.ToUpper()));
 
             foreach(Produto p in list)
                 Console.WriteLine(p);
