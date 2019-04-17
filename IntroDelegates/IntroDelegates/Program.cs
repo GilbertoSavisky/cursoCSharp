@@ -1,19 +1,28 @@
-﻿namespace System
+﻿using System.Collections.Generic;
+
+namespace System
 {
     class Program
     {
-        //BinaryNumericOperation
-        delegate void OperacaoBinariaNumerica(double n1, double n2);
-
         static void Main(string[] args)
         {
-            double a = 10;
-            double b = 12;
+            List<Produto> list = new List<Produto>();
+            list.Add(new Produto("Tv", 900.00));
+            list.Add(new Produto("Mouse", 50.00));
+            list.Add(new Produto("Tablet", 350.50));
+            list.Add(new Produto("HD Case", 80.90));
 
-            OperacaoBinariaNumerica op = CalculationService.ShowSum;
-            op += CalculationService.ShowMax;
-            op.Invoke(a,b);
-            
+            /*Função Lambda
+            list.RemoveAll(p => p.Preco >= 100.0);*/
+
+            list.RemoveAll(TestaProduto);
+            foreach (Produto p in list)
+                Console.WriteLine(p);
+        }
+
+        public static bool TestaProduto(Produto p)
+        {
+            return p.Preco >= 100.0;
         }
     }
 }
