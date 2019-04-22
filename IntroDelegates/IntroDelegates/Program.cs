@@ -15,6 +15,7 @@ namespace System
             /*Função Lambda
             list.RemoveAll(p => p.Preco >= 100.0);*/
 
+            // Predicate -> função por parametro que retorna bool
             list.RemoveAll(TestaProduto);
             foreach (Produto p in list)
                 Console.WriteLine(p);
