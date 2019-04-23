@@ -11,7 +11,7 @@ namespace System
         {
             Console.Write("Digite o caminho do arquivo :");
             string path = Console.ReadLine();
-            List<Produto> prod = new List<Produto>();
+            List<Funcionario> func = new List<Funcionario>();
 
             using (StreamReader sr = File.OpenText(path))
             {
@@ -19,17 +19,26 @@ namespace System
                 {
                     string[] fields = sr.ReadLine().Split(',');
                     string nome = fields[0];
-                    double preco = double.Parse(fields[1], CultureInfo.InvariantCulture);
-                    prod.Add(new Produto(nome, preco));
+                    string email = fields[1];
+                    double salario = double.Parse(fields[2], CultureInfo.InvariantCulture);
+                    func.Add(new Funcionario(nome, email,salario));
                 }
             }
 
-            var avg = prod.Select(p => p.Preco).DefaultIfEmpty(0.0).Average();
-            Console.WriteLine("Média dos preços= "+avg.ToString("F2", CultureInfo.InvariantCulture));
-            var nomes = prod.Where(p => p.Preco < avg).OrderByDescending(p => p.Nome).Select(p => p.Nome);
+            Console.Write("Entre com um salario: ");
+            double sal = double.Parse(Console.ReadLine());
 
-            foreach(string nome in nomes)
-                Console.WriteLine(nome);
+            var emails = func.Where(f => f.Salario > sal).OrderBy(f => f.Email).Select(f => f.Email);
+            Console.WriteLine("Email da pessoa onde o salario é maior que = " + sal);
+
+            foreach (string email in emails)
+                Console.WriteLine(email);
+
+
+            var sum = func.Where(f => f.Nome[0] == 'M').Sum(f => f.Salario);
+            Console.WriteLine("Soma dos salarios das pessoas que comecam com a letra M = " + sum.ToString("F2", CultureInfo.InvariantCulture));
+
+
         }
     }
 }
